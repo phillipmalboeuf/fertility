@@ -1,0 +1,81 @@
+@import "./variables.scss";
+@import "./fonts.scss";
+
+:root {
+	font-family: $text;
+	background-color: $white;
+	color: $black;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body,
+html {
+	min-height: 100vh;
+	margin: 0;
+	font-size: $base;
+}
+
+body {
+	padding: $base;
+}
+
+h1,
+h2 {
+	font-family: $display;
+}
+
+p {
+	font-size: $base;
+	font-weight: 300;
+}
+
+p {
+	line-height: 1.13333333;
+}
+
+a {
+	color: currentColor;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+h1 {
+	// font-size: 2rem;
+	// text-align: center;
+}
+
+h2 {
+	// font-size: 1rem;
+}
+
+input,
+button {
+	font-size: inherit;
+	color: inherit;
+	font-family: inherit;
+	text-transform: inherit;
+	border: none;
+	background: none;
+	padding: 0;
+}
+
+button {
+	cursor: pointer;
+
+	&:hover,
+	&:focus {
+		text-decoration: underline;
+	}
+}
+
+button:focus:not(:focus-visible) {
+	outline: none;
+}

@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+import type { EntryFieldTypes } from "contentful";
+
+import { client } from '../clients/contentful'
+
+const entries = await client.getEntries({
+  content_type: "page",
+})
+---
+
+<Layout title="Welcome to Astro.">
+	<main>
+		<h1>Welcome to <span>Hell</span></h1>
+		<p>Some bodies</p>
+
+		{entries.items.map((item) => (
+    <section>
+      <h2>{item.fields.title}</h2>
+      
+    </section>
+  ))}
+	</main>
+</Layout>
+
+<style lang="scss">
+	
+	h1 {
+		// font-family: $display;
+	}
+</style>

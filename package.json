@@ -1,0 +1,22 @@
+{
+  "name": "fertility",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev --open",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.3.1",
+    "@contentful/rich-text-html-renderer": "^16.3.0",
+    "astro": "^3.5.4",
+    "contentful": "^10.6.10",
+    "typescript": "^5.2.2"
+  },
+  "devDependencies": {
+    "sass": "^1.69.5"
+  }
+}
