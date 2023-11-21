@@ -1,27 +1,27 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '@/layouts/Layout.astro';
 
-import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
-import type { EntryFieldTypes } from "contentful";
+import { client } from '@/clients/contentful'
+import type { TypePageSkeleton, TypeNavigationSkeleton } from '@/content_types'
 
-import { client } from '../clients/contentful'
+import Page from '@/components/Page.astro'
+import Logo from '@/components/Logo.astro';
 
-const entries = await client.getEntries({
+const page = (await client.getEntries<TypePageSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">({
   content_type: "page",
-})
+	"fields.id": "home",
+	include: 3,
+})).items[0]
+
+const navigation = (await client.getEntries<TypeNavigationSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">({
+  content_type: "navigation",
+	"fields.id": "navigation",
+})).items[0]
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title={page.fields.title}>
 	<main>
-		<h1>Welcome to <span>Hell</span></h1>
-		<p>Some bodies</p>
-
-		{entries.items.map((item) => (
-    <section>
-      <h2>{item.fields.title}</h2>
-      
-    </section>
-  ))}
+		<Page {page} {navigation} index />
 	</main>
 </Layout>
 

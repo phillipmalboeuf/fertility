@@ -1,0 +1,33 @@
+---
+import { client } from '@/clients/contentful'
+import type { TypePageSkeleton, TypeNavigationSkeleton } from '@/content_types'
+
+import Page from '@/components/Page.astro';
+import Layout from '@/layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const entries = await client.getEntries<TypePageSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">({
+    content_type: "page",
+    select: ['fields.id']
+  })
+
+  return entries.items.map(page => ({ params: { id: page.fields.id } }))
+}
+
+const { id } = Astro.params;
+const page = (await client.getEntries<TypePageSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">({
+  content_type: "page",
+	"fields.id": id,
+	include: 3,
+})).items[0]
+
+const navigation = (await client.getEntries<TypeNavigationSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">({
+  content_type: "navigation",
+	"fields.id": "navigation",
+})).items[0]
+---
+
+
+<Layout title={page.fields.title}>
+  <Page {page} {navigation} color={navigation.fields.links.find(link => link.fields.destination === `/${page.fields.id}`).fields.color} />
+</Layout>

@@ -18,6 +18,15 @@ font-style: italic;
 }
 @font-face {
 font-family: 'Media77';
+src: url('/fonts/Media77-Regular/Media77-Regular.eot');
+src: url('/fonts/Media77-Regular/Media77-Regular.eot?#iefix') format('embedded-opentype'),
+url('/fonts/Media77-Regular/Media77-Regular.woff2') format('woff2'),
+url('/fonts/Media77-Regular/Media77-Regular.woff') format('woff');
+font-weight: 400;
+font-style: normal;
+}
+@font-face {
+font-family: 'Media77';
 src: url('/fonts/Media77-Italic/Media77-Italic.eot');
 src: url('/fonts/Media77-Italic/Media77-Italic.eot?#iefix') format('embedded-opentype'),
 url('/fonts/Media77-Italic/Media77-Italic.woff2') format('woff2'),

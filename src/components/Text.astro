@@ -1,0 +1,74 @@
+---
+import type { Entry } from 'contentful'
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
+import type { EntryFieldTypes } from "contentful"
+import type { TypePageSkeleton, TypeNavigationSkeleton, TypeTextSkeleton } from '@/content_types'
+
+interface Props {
+  item: Entry<TypeTextSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">
+}
+const { item } = Astro.props;
+---
+
+<details id={item.fields.id}>
+  <summary>
+    <h2>{item.fields.title}</h2>
+    <svg class="plus" xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+      <rect x="0.157715" y="7.74622" width="20.2969" height="5.36" rx="2.68" fill="currentColor"/>
+      <rect x="12.9858" y="0.277832" width="20.2969" height="5.36" rx="2.68" transform="rotate(90 12.9858 0.277832)" fill="currentColor"/>
+    </svg>
+    <svg class="minus" xmlns="http://www.w3.org/2000/svg" width="21" height="6" viewBox="0 0 21 6" fill="none">
+      <rect x="0.0224609" y="0.319946" width="20.2969" height="5.36" rx="2.68" fill="currentColor"/>
+    </svg>
+  </summary>
+  <section>
+    <Fragment set:html={documentToHtmlString(item.fields.body)} />  
+  </section>
+</details>
+
+<style lang="scss">
+  details {
+    summary {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: $base;
+      color: white;
+      background-color: var(--color);
+      margin-bottom: 1px;
+
+      .minus {
+        display: none;
+      }
+    }
+
+    summary::-webkit-details-marker,
+    summary::marker {
+      display: none;
+      content: "";
+    }
+
+    &[open] summary {
+      margin-bottom: $base;
+
+      .minus {
+        display: inline-block;
+      }
+
+      .plus {
+        display: none;
+      }
+    }
+
+    section {
+      display: flex;
+      flex-direction: column;
+      gap: $base;
+
+      max-width: $base * 36;
+      margin: ($base * 3) auto ($base * 6);
+    }
+  }
+</style>

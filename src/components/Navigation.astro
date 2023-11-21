@@ -1,0 +1,17 @@
+---
+import type { Entry } from 'contentful'
+import type { TypePageSkeleton, TypeNavigationSkeleton } from '@/content_types'
+
+interface Props {
+  item: Entry<TypeNavigationSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">
+}
+const { item } = Astro.props;
+---
+
+<nav id={item.fields.id}>
+  <ol class="list--unstyled">
+    {item.fields.links.map(link => <li style={{ color: link.fields.color }}>
+      <a href={link.fields.destination}><h2>{link.fields.label}</h2></a>
+    </li>)}
+  </ol>
+</nav>
