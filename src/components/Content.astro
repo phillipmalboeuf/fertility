@@ -1,0 +1,20 @@
+---
+import type { Entry } from 'contentful'
+import type { TypePageSkeleton, TypeNavigationSkeleton } from '@/content_types'
+import Navigation from './Navigation.astro'
+import Text from './Text.astro'
+import Gallery from './Gallery.astro'
+import Playlist from './Playlist.astro'
+
+interface Props {
+  content: any
+}
+const { content } = Astro.props;
+---
+
+{content?.map(item => ({
+  'navigation': <Navigation {item} />,
+  'gallery': <Gallery {item} />,
+  'playlist': <Playlist {item} />,
+  'text': <Text {item} />
+}[item.sys.contentType.sys.id]))}

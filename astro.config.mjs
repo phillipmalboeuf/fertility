@@ -1,7 +1,12 @@
 import { defineConfig } from 'astro/config';
 
+import svelte from "@astrojs/svelte";
+
 // https://astro.build/config
 export default defineConfig({
+  image: {
+    domains: ["images.ctfassets.net", "downloads.ctfassets.net"]
+  },
   vite: {
     css: {
       preprocessorOptions: {
@@ -10,5 +15,6 @@ export default defineConfig({
         }
       }
     }
-  }
+  },
+  integrations: [svelte()]
 });

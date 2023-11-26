@@ -1,0 +1,65 @@
+---
+import type { Entry } from 'contentful'
+import type { TypePlaylistSkeleton } from '@/content_types'
+
+import Audio from '@/components/Audio.svelte'
+
+interface Props {
+  item: Entry<TypePlaylistSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">
+}
+const { item } = Astro.props;
+---
+
+<figure>
+  <center>
+    <h2>{item.fields.title}</h2>
+  </center>
+
+  <ol>
+    {item.fields.audioFiles.map(media => <li class="h2">
+      <Audio {media} client:visible />
+    </li>)}
+  </ol>
+  
+  <center>
+    <a href=""></a>
+  </center>
+</figure>
+
+<style lang="scss">
+  figure {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    center {
+      padding: $base * 2;
+    }
+
+    ol {
+      list-style: none;
+      padding-left: 0;
+      width: 100%;
+      max-width: $base * 33;
+      margin: auto;
+
+      li {
+        audio {
+        }
+
+        :global(button) {
+          text-align: left;
+          padding: ($base * 2) 0;
+          width: 100%;
+          border-bottom: 1px solid;
+
+          &:hover,
+          &:focus {
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+</style>

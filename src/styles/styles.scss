@@ -21,11 +21,12 @@ html {
 }
 
 body {
-	// padding: $base;
+	white-space: pre-line;
 }
 
 h1,
 h2,
+.h2,
 h3,
 h4 {
 	font-family: $display;
@@ -38,7 +39,8 @@ h1 {
 	font-size: $base * 3;
 }
 
-h2 {
+h2,
+.h2 {
 	font-size: $base * 2.125;
 }
 

@@ -1,5 +1,15 @@
 import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleCode } from "contentful";
 
+export interface TypeGalleryFields {
+    title?: EntryFieldTypes.Symbol;
+    overlays?: EntryFieldTypes.Array<EntryFieldTypes.AssetLink>;
+    underlays?: EntryFieldTypes.Array<EntryFieldTypes.AssetLink>;
+    content?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypePlaylistSkeleton | TypeTextSkeleton>>;
+}
+
+export type TypeGallerySkeleton = EntrySkeletonType<TypeGalleryFields, "gallery">;
+export type TypeGallery<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeGallerySkeleton, Modifiers, Locales>;
+
 export interface TypeLinkFields {
     label?: EntryFieldTypes.Symbol;
     destination?: EntryFieldTypes.Symbol;
@@ -20,11 +30,19 @@ export type TypeNavigation<Modifiers extends ChainModifiers, Locales extends Loc
 export interface TypePageFields {
     title?: EntryFieldTypes.Symbol;
     id: EntryFieldTypes.Symbol;
-    content?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeNavigationSkeleton | TypeTextSkeleton>>;
+    content?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeGallerySkeleton | TypeNavigationSkeleton | TypePlaylistSkeleton | TypeTextSkeleton>>;
 }
 
 export type TypePageSkeleton = EntrySkeletonType<TypePageFields, "page">;
 export type TypePage<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypePageSkeleton, Modifiers, Locales>;
+
+export interface TypePlaylistFields {
+    title?: EntryFieldTypes.Symbol;
+    audioFiles?: EntryFieldTypes.Array<EntryFieldTypes.AssetLink>;
+}
+
+export type TypePlaylistSkeleton = EntrySkeletonType<TypePlaylistFields, "playlist">;
+export type TypePlaylist<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypePlaylistSkeleton, Modifiers, Locales>;
 
 export interface TypeTextFields {
     title?: EntryFieldTypes.Symbol;

@@ -4,6 +4,8 @@ import type { TypePageSkeleton, TypeNavigationSkeleton } from '@/content_types'
 import Navigation from './Navigation.astro'
 import Text from './Text.astro'
 import Logo from './Logo.astro'
+import Gallery from './Gallery.astro'
+import Content from './Content.astro'
 
 interface Props {
   page: any
@@ -15,7 +17,7 @@ const { page, navigation, color, index } = Astro.props;
 ---
 
 <main style={`--color: ${color};`}>
-  <aside>
+  <aside class:list={[{ index }]}>
     {index
       ? <Navigation item={navigation} />
       : <a href="/">
@@ -31,10 +33,7 @@ const { page, navigation, color, index } = Astro.props;
 
   <!-- <pre>{JSON.stringify(page.fields.content, null, 2)}</pre> -->
   <section>
-    {page.fields.content?.map(item => ({
-      'navigation': <Navigation {item} />,
-      'text': <Text {item} />
-    }[item.sys.contentType.sys.id]))}
+    <Content content={page.fields.content} />
   </section>
 </main>
 
@@ -61,6 +60,10 @@ const { page, navigation, color, index } = Astro.props;
       > a {
         display: flex;
         justify-content: space-between;
+      }
+
+      &.index {
+        background-color: $white;
       }
     }
 
