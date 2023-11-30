@@ -8,6 +8,7 @@ interface Props {
   item: Entry<TypePlaylistSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">
 }
 const { item } = Astro.props;
+const one = item.fields.audioFiles.length === 1
 ---
 
 <figure>
@@ -15,14 +16,14 @@ const { item } = Astro.props;
     <h2>{item.fields.title}</h2>
   </center>
 
-  <ol>
-    {item.fields.audioFiles.map(media => <li class="h2">
-      <Audio {media} client:visible />
+  <ol class:list={{ one }}>
+    {item.fields.audioFiles.map(media => <li class={one ? "h1" : "h2"}>
+      <Audio {media} play={one} client:visible />
     </li>)}
   </ol>
   
   <center>
-    <a href=""></a>
+    <a href="">Full Track List</a>
   </center>
 </figure>
 
@@ -57,6 +58,15 @@ const { item } = Astro.props;
           &:hover,
           &:focus {
             text-decoration: none;
+          }
+        }
+      }
+
+      &.one {
+        li {
+          :global(button) {
+            border-bottom: none;
+            justify-content: center;
           }
         }
       }

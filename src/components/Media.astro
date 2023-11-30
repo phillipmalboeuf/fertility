@@ -4,11 +4,22 @@ import type { Asset } from 'contentful'
 
 interface Props {
   media: Asset<"WITHOUT_UNRESOLVABLE_LINKS">
+  small?: boolean
+  eager?: boolean
+  square?: boolean
 }
-const { media } = Astro.props;
+const { media, small, eager, square } = Astro.props;
+const widths = [360, 720, 1080, 1440, 1800]
 ---
 
-{media && <Picture src={media.fields.file.url.toString()} alt={media.fields.title+" "+media.fields.description} width={media.fields.file.details.image.width} height={media.fields.file.details.image.height} />}
+{media && <picture>
+  {widths.map(width => <source srcset={`${media.fields.file.url}?w=${small ? width / 2 : width}`} media={`(max-width: ${width}px)`} />)}
+  <img src={`${media.fields.file.url}?w=1800`} alt={media.fields.title+" "+media.fields.description}
+    loading={eager ? 'eager' : 'lazy'} 
+    width={media.fields.file.details.image.width}
+    height={media.fields.file.details.image.height}
+    style={{ aspectRatio: square ? '1 / 1' : `${media.fields.file.details.image.width} / ${media.fields.file.details.image.height}` }} />
+</picture>}
 
 
 <style lang="scss">

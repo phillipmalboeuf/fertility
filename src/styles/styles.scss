@@ -25,6 +25,7 @@ body {
 }
 
 h1,
+.h1,
 h2,
 .h2,
 h3,
@@ -35,7 +36,8 @@ h4 {
 	line-height: 1;
 }
 
-h1 {
+h1,
+.h1 {
 	font-size: $base * 3;
 }
 
@@ -103,4 +105,14 @@ button {
 
 button:focus:not(:focus-visible) {
 	outline: none;
+}
+
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
