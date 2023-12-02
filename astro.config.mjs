@@ -4,6 +4,7 @@ import svelte from "@astrojs/svelte";
 
 // https://astro.build/config
 export default defineConfig({
+  prefetch: true,
   image: {
     domains: ["images.ctfassets.net", "downloads.ctfassets.net"]
   },
