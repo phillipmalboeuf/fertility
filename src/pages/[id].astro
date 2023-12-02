@@ -29,5 +29,5 @@ const navigation = (await client.getEntries<TypeNavigationSkeleton, "WITHOUT_UNR
 
 
 <Layout title={page.fields.title}>
-  <Page {page} {navigation} color={navigation.fields.links.find(link => link.fields.destination === `/${page.fields.id}`).fields.color} />
+  <Page {page} {navigation} color={navigation.fields.links.find(link => link.fields.destination === `/${page.fields.id}`)?.fields.color} />
 </Layout>
