@@ -29,9 +29,13 @@ h1,
 h2,
 .h2,
 h3,
+.h3,
 h4,
+.h4,
 h5,
-h6 {
+.h5,
+h6,
+.h6 {
 	font-family: $display;
 	font-weight: 500;
 	letter-spacing: -0.005em;
@@ -57,12 +61,13 @@ h4 {
 	font-size: $base * 1.33;
 }
 
-h5, h6 {
+h5, h6, .h6 {
 	font-size: $base * 1.25;
 	line-height: 1.25;
 }
 
-h6 {
+h6,
+.h6 {
 	font-size: $base;
 }
 

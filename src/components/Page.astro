@@ -20,13 +20,19 @@ const { page, navigation, color, index } = Astro.props;
   <aside class:list={[{ index }]}>
     {index
       ? <Navigation item={navigation} />
-      : <a href="/">
-        <h2>Close</h2>
-        <svg width="44" height="44" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="20.5479" y="12.2322" width="44.3844" height="11.721" rx="5.36" transform="rotate(45 20.5479 12.2322)" fill="black"/>
-        <rect x="51.9341" y="20.5199" width="44.3844" height="11.721" rx="5.36" transform="rotate(135 51.9341 20.5199)" fill="black"/>
-        </svg>
-      </a>}
+      : <>
+        <a href="/">
+          <h2>Close</h2>
+          <svg width="44" height="44" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20.5479" y="12.2322" width="44.3844" height="11.721" rx="5.36" transform="rotate(45 20.5479 12.2322)" fill="black"/>
+          <rect x="51.9341" y="20.5199" width="44.3844" height="11.721" rx="5.36" transform="rotate(135 51.9341 20.5199)" fill="black"/>
+          </svg>
+        </a>
+        <div>
+          <h4>Wherever you are in your fertility journey, I’m here to help.</h4>
+          <a href="/" class="h6">Let’s work together <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M0.0927736 6.67108L13.0928 6.67108L13.0928 8.17108L0.0927734 8.17108L0.0927736 6.67108Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M7.80187 0.158752L6.74121 1.21941L12.9159 7.3941L6.74121 13.5688L7.80187 14.6295L13.9766 8.45477L15.0372 7.39411L13.9766 6.33344L7.80187 0.158752Z" fill="currentColor"/></svg></a>
+        </div>
+      </>}
     <Logo />
   </aside>
   <!-- <h1>{page.fields.title}</h1> -->
@@ -60,6 +66,13 @@ const { page, navigation, color, index } = Astro.props;
       > a {
         display: flex;
         justify-content: space-between;
+      }
+
+      > div > a {
+        display: flex;
+        gap: $base * 0.5;
+        margin-top: $base;
+        align-items: center;
       }
 
       &.index {
