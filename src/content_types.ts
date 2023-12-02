@@ -48,7 +48,9 @@ export interface TypeTextFields {
     title?: EntryFieldTypes.Symbol;
     id?: EntryFieldTypes.Symbol;
     collapsable?: EntryFieldTypes.Boolean;
+    rounded?: EntryFieldTypes.Boolean;
     body?: EntryFieldTypes.RichText;
+    more?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypePlaylistSkeleton | TypeTextSkeleton>>;
 }
 
 export type TypeTextSkeleton = EntrySkeletonType<TypeTextFields, "text">;
