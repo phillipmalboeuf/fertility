@@ -19,6 +19,7 @@
     "typescript": "^5.2.2"
   },
   "devDependencies": {
+    "@astrojs/vercel": "^5.2.0",
     "sass": "^1.69.5"
   }
 }

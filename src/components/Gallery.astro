@@ -10,6 +10,9 @@ interface Props {
 }
 const { item } = Astro.props;
 
+const ip = Astro.request.headers.get('x-real-ip')
+const city = decodeURIComponent(Astro.request.headers.get('x-vercel-ip-city'))
+
 const randoms = {
   underlays: Math.floor(Math.random() * item.fields.underlays.length),
   content: Math.floor(Math.random() * item.fields.content.length),
@@ -22,7 +25,7 @@ const randoms = {
     <Media media={item.fields.underlays[randoms.underlays]} eager square />
 
     <details>
-      <summary>{item.fields.title} <Fragment set:html={Close} /></summary>
+      <summary>{item.fields.title} {city} <Fragment set:html={Close} /></summary>
       <Content content={[item.fields.content[randoms.content]]} />
     </details>
 
