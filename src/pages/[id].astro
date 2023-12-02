@@ -18,7 +18,7 @@ const { id } = Astro.params;
 const page = (await client.getEntries<TypePageSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">({
   content_type: "page",
 	"fields.id": id,
-	include: 3,
+	include: 4,
 })).items[0]
 
 const navigation = (await client.getEntries<TypeNavigationSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">({
