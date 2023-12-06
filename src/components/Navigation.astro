@@ -4,14 +4,15 @@ import type { TypePageSkeleton, TypeNavigationSkeleton } from '@/content_types'
 
 interface Props {
   item: Entry<TypeNavigationSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">
+  small?: boolean
 }
-const { item } = Astro.props;
+const { item, small } = Astro.props;
 ---
 
 <nav id={item.fields.id}>
   <ol class="list--unstyled">
     {item.fields.links.map(link => <li style={{ color: link.fields.color }}>
-      <a href={link.fields.destination} data-astro-prefetch><h2>{link.fields.label}</h2></a>
+      <a href={link.fields.destination} data-astro-prefetch>{small ? <h6>{link.fields.label}</h6> : <h2>{link.fields.label}</h2>}</a>
     </li>)}
   </ol>
 </nav>

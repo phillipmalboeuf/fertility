@@ -10,11 +10,12 @@ import Content from './Content.astro'
 interface Props {
   page: any
   navigation: Entry<TypeNavigationSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">
+  bottomNavigation?: Entry<TypeNavigationSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">
   color?: string
   index?: boolean
   counter?: number
 }
-const { page, navigation, color, index, counter } = Astro.props;
+const { page, navigation, bottomNavigation, color, index, counter } = Astro.props;
 ---
 
 <main style={`--color: ${color};`}>
@@ -41,6 +42,8 @@ const { page, navigation, color, index, counter } = Astro.props;
   <!-- <pre>{JSON.stringify(page.fields.content, null, 2)}</pre> -->
   <section>
     <Content content={page.fields.content} />
+
+    {bottomNavigation && <Navigation item={bottomNavigation} small />}
   </section>
 </main>
 
@@ -90,5 +93,12 @@ const { page, navigation, color, index, counter } = Astro.props;
       flex: 3;
       color: var(--color);
       padding: $base * 3;
+
+      > :global(nav ol) {
+        display: flex;
+        justify-content: center;
+        gap: $base * 2;
+        margin-top: 50vh;
+      }
     }
 </style>

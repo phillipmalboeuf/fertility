@@ -1,31 +1,26 @@
 ---
-export const prerender = true
+import Layout from '@/layouts/Layout.astro';
 
 import { client } from '@/clients/contentful'
 import type { TypePageSkeleton, TypeNavigationSkeleton } from '@/content_types'
 
-import Page from '@/components/Page.astro';
-import Layout from '@/layouts/Layout.astro';
+import Page from '@/components/Page.astro'
+import Logo from '@/components/Logo.astro';
 
-export async function getStaticPaths() {
-  const entries = await client.getEntries<TypePageSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">({
-    content_type: "page",
-    select: ['fields.id']
-  })
-
-  return entries.items.map(page => ({ params: { id: page.fields.id } }))
-}
-
-const { id } = Astro.params;
 const page = (await client.getEntries<TypePageSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">({
   content_type: "page",
-	"fields.id": id,
-	include: 4,
+	"fields.id": "contact",
+	include: 3,
 })).items[0]
 
 const navigation = (await client.getEntries<TypeNavigationSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">({
   content_type: "navigation",
 	"fields.id": "navigation",
+})).items[0]
+
+const bottomNavigation = (await client.getEntries<TypeNavigationSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">({
+  content_type: "navigation",
+	"fields.id": "contact",
 })).items[0]
 
 let counter = 0
@@ -38,7 +33,15 @@ if (Astro.cookies.has("counter")) {
 Astro.cookies.set("counter", counter.toString())
 ---
 
-
 <Layout title={page.fields.title}>
-  <Page {page} {navigation} color={navigation.fields.links.find(link => link.fields.destination === `/${page.fields.id}`)?.fields.color} {counter} />
+	<main>
+		<Page {page} {navigation} {bottomNavigation} color={navigation.fields.links.find(link => link.fields.destination === `/${page.fields.id}`)?.fields.color} {counter} />
+	</main>
 </Layout>
+
+<style lang="scss">
+	
+	h1 {
+		// font-family: $display;
+	}
+</style>
