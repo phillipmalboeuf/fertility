@@ -130,6 +130,11 @@ const { item } = Astro.props;
       max-width: $base * 36;
       margin: ($base * 3) auto ($base * 6);
 
+      @media (max-width: $phone) {
+        padding-left: $base;
+        padding-right: $base;
+      }
+
       :global(h5),
       :global(h6) {
         text-align: center;

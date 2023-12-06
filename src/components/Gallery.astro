@@ -17,7 +17,7 @@ const randoms = {
 }
 ---
 
-<section>
+<section class="gallery">
   <figure>
     <Media media={item.fields.underlays[randoms.underlays]} eager square />
 
@@ -37,10 +37,18 @@ const randoms = {
     margin: $base * -3;
     background: var(--gallery-color);
     overflow: hidden;
+
+    @media (max-width: $phone) {
+      margin: 0;
+    }
   }
 
   figure {
     height: 100vh;
+
+    @media (max-width: $phone) {
+      height: 80vh;
+    }
 
     :global(picture) {
       width: 100%;
@@ -51,8 +59,8 @@ const randoms = {
 
       &:first-child {
         :global(img) {
-          height: 72vh;
-          width: 72vh;
+          height: min(72vh, 92vw);
+          width: min(72vh, 92vw);
           max-height: none;
           object-fit: cover;
           border-radius: 50%;
@@ -73,8 +81,8 @@ const randoms = {
       -webkit-mask-repeat: no-repeat;
       mask-position: center;
       -webkit-mask-position: center;
-      mask-size: 120vh;
-      -webkit-mask-size: 120vh;
+      mask-size: min(120vh, 153vw);
+      -webkit-mask-size: min(120vh, 153vw);
       animation: rotating 20s linear infinite;
     }
 

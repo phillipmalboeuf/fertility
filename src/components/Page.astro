@@ -6,6 +6,7 @@ import Text from './Text.astro'
 import Logo from './Logo.astro'
 import Gallery from './Gallery.astro'
 import Content from './Content.astro'
+import LogoWide from './LogoWide.astro'
 
 interface Props {
   page: any
@@ -24,10 +25,10 @@ const { page, navigation, bottomNavigation, color, index, counter } = Astro.prop
       ? <Navigation item={navigation} />
       : <>
         <a href="/">
-          <h2>Close</h2>
+          <h2>Close <LogoWide /></h2>
           <svg width="44" height="44" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="20.5479" y="12.2322" width="44.3844" height="11.721" rx="5.36" transform="rotate(45 20.5479 12.2322)" fill="black"/>
-          <rect x="51.9341" y="20.5199" width="44.3844" height="11.721" rx="5.36" transform="rotate(135 51.9341 20.5199)" fill="black"/>
+          <rect x="20.5479" y="12.2322" width="44.3844" height="11.721" rx="5.36" transform="rotate(45 20.5479 12.2322)" fill="currentColor"/>
+          <rect x="51.9341" y="20.5199" width="44.3844" height="11.721" rx="5.36" transform="rotate(135 51.9341 20.5199)" fill="currentColor"/>
           </svg>
         </a>
         <div>
@@ -51,17 +52,42 @@ const { page, navigation, bottomNavigation, color, index, counter } = Astro.prop
   main {
     display: flex;
     min-height: 100vh;
-    // flex-direction: column;
-    // // gap: $base;
+
+    @media (max-width: $phone) {
+      flex-direction: column;
+
+      :global(nav) {
+        margin-top: calc(80vh + ($base * 1));
+
+        :global(li) {
+          border-bottom: 1px solid;
+          padding: ($base * 0.75) ($base * 1);
+          margin: 0 ($base * -1);
+        }
+      }
+
+      :global(.gallery) {
+        position: absolute;
+        top: $base * 13;
+        width: 100%;
+      }
+    }
   }
 
     aside {
-      flex: 1;
       padding: $base * 3;
       background-color: $beige;
-      height: 100vh;
-      position: sticky;
-      top: 0;
+      
+      @media (min-width: $phone) {
+        position: sticky;
+        top: 0;
+        flex: 1;
+        height: 100vh;
+      }
+
+      @media (max-width: $phone) {
+        padding: $base * 1;
+      }
 
       display: flex;
       flex-direction: column;
@@ -70,22 +96,56 @@ const { page, navigation, bottomNavigation, color, index, counter } = Astro.prop
       > a {
         display: flex;
         justify-content: space-between;
+
+        @media (min-width: $phone) {
+          :global(svg) {
+            display: none;
+          }
+        }
+
+        @media (max-width: $phone) {
+          h2 {
+            font-size: 0;
+          }
+        }
       }
 
-      > div > a {
-        display: flex;
-        gap: $base * 0.5;
-        margin-top: $base;
-        align-items: center;
-      }
+      > div {
+        @media (max-width: $phone) {
+          display: none;
+        }
+
+        > a {
+          display: flex;
+          gap: $base * 0.5;
+          margin-top: $base;
+          align-items: center;
+        }
+      } 
 
       > :global(svg) {
         width: 100%;
         height: auto;
+
+        @media (max-width: $phone) {
+          order: -1;
+          margin-top: $base * -4;
+        }
       }
 
       &.index {
         background-color: $white;
+      }
+
+      &:not(.index) {
+        @media (max-width: $phone) {
+          color: $white;
+          background-color: $black;
+
+          > :global(svg) {
+            display: none;
+          }
+        }
       }
     }
 
@@ -93,6 +153,10 @@ const { page, navigation, bottomNavigation, color, index, counter } = Astro.prop
       flex: 3;
       color: var(--color);
       padding: $base * 3;
+
+      @media (max-width: $phone) {
+        padding: 0;
+      }
 
       > :global(nav ol) {
         display: flex;

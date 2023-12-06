@@ -1,6 +1,7 @@
 ---
 import type { Entry } from 'contentful'
 import type { TypePageSkeleton, TypeNavigationSkeleton } from '@/content_types'
+import Close from '@/icons/close.svg?raw'
 
 interface Props {
   item: Entry<TypeNavigationSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">
@@ -12,7 +13,24 @@ const { item, small } = Astro.props;
 <nav id={item.fields.id}>
   <ol class="list--unstyled">
     {item.fields.links.map(link => <li style={{ color: link.fields.color }}>
-      <a href={link.fields.destination} data-astro-prefetch>{small ? <h6>{link.fields.label}</h6> : <h2>{link.fields.label}</h2>}</a>
+      <a href={link.fields.destination} data-astro-prefetch>{small ? <h6>{link.fields.label}</h6> : <h2>{link.fields.label}</h2>} <Fragment set:html={Close} /></a>
     </li>)}
   </ol>
 </nav>
+
+<style lang="scss">
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    :global(svg) {
+      width: $base * 2;
+      height: $base * 2;
+      transform: rotate(45deg);
+      @media (min-width: $phone) {
+        display: none;
+      }
+    }
+  }
+</style>
