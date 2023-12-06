@@ -28,14 +28,7 @@ const navigation = (await client.getEntries<TypeNavigationSkeleton, "WITHOUT_UNR
 	"fields.id": "navigation",
 })).items[0]
 
-let counter = 0
-
-if (Astro.cookies.has("counter")) {
-  const cookie = Astro.cookies.get("counter")
-  counter = (cookie.number() + 1) % 4
-}
-
-Astro.cookies.set("counter", counter.toString())
+let counter = Astro.cookies.has("counter") ? Astro.cookies.get("counter").number() : 0
 ---
 
 
