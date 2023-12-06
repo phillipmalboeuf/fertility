@@ -17,11 +17,20 @@ const navigation = (await client.getEntries<TypeNavigationSkeleton, "WITHOUT_UNR
   content_type: "navigation",
 	"fields.id": "navigation",
 })).items[0]
+
+let counter = 0
+
+if (Astro.cookies.has("counter")) {
+  const cookie = Astro.cookies.get("counter")
+  counter = (cookie.number() + 1) % 4
+}
+
+Astro.cookies.set("counter", counter.toString())
 ---
 
 <Layout title={page.fields.title}>
 	<main>
-		<Page {page} {navigation} index />
+		<Page {page} {navigation} index {counter} />
 	</main>
 </Layout>
 
