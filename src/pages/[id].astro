@@ -5,14 +5,14 @@ import type { TypePageSkeleton, TypeNavigationSkeleton } from '@/content_types'
 import Page from '@/components/Page.astro';
 import Layout from '@/layouts/Layout.astro';
 
-export async function getStaticPaths() {
-  const entries = await client.getEntries<TypePageSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">({
-    content_type: "page",
-    select: ['fields.id']
-  })
+// export async function getStaticPaths() {
+//   const entries = await client.getEntries<TypePageSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">({
+//     content_type: "page",
+//     select: ['fields.id']
+//   })
 
-  return entries.items.map(page => ({ params: { id: page.fields.id } }))
-}
+//   return entries.items.map(page => ({ params: { id: page.fields.id } }))
+// }
 
 const { id } = Astro.params;
 const page = (await client.getEntries<TypePageSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">({
