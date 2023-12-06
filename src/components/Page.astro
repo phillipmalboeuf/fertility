@@ -57,7 +57,8 @@ const { page, navigation, bottomNavigation, color, index, counter } = Astro.prop
       flex-direction: column;
 
       :global(nav) {
-        margin-top: calc(80vh + ($base * 1));
+        // margin-top: calc(80vh + ($base * 1));
+        margin-top: $base * 1;
 
         :global(li) {
           border-bottom: 1px solid;
@@ -66,11 +67,11 @@ const { page, navigation, bottomNavigation, color, index, counter } = Astro.prop
         }
       }
 
-      :global(.gallery) {
-        position: absolute;
-        top: $base * 13;
-        width: 100%;
-      }
+      // :global(.gallery) {
+      //   position: absolute;
+      //   top: calc(55vw - $base);
+      //   width: 100%;
+      // }
     }
   }
 
