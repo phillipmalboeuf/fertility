@@ -11,9 +11,8 @@ interface Props {
 const { item } = Astro.props;
 
 const randoms = {
-  underlays: Math.floor(Math.random() * item.fields.underlays.length),
-  // content: Math.floor(Math.random() * item.fields.content.length),
-  content: 2,
+  underlays: Math.floor(Math.random() * item.fields.underlays?.length),
+  content: Math.floor(Math.random() * item.fields.content.length),
   overlays: Math.floor(Math.random() * item.fields.overlays.length),
 }
 ---

@@ -1,4 +1,7 @@
 ---
+// import { slide } from 'astro:transitions';
+import type { TransitionDirectionalAnimations } from 'astro'
+
 import type { Entry } from 'contentful'
 import type { TypePageSkeleton, TypeNavigationSkeleton } from '@/content_types'
 import Navigation from './Navigation.astro'
@@ -7,6 +10,41 @@ import Logo from './Logo.astro'
 import Gallery from './Gallery.astro'
 import Content from './Content.astro'
 import LogoWide from './LogoWide.astro'
+
+const slide = {
+  old: {
+    name: 'fadeOut',
+    duration: '0.333s',
+    // easing: 'linear',
+  },
+  new: {
+    name: 'slideLeft',
+    duration: '0.666s',
+    // easing: 'linear',
+  }
+}
+const slideLeft: TransitionDirectionalAnimations = {
+  forwards: slide,
+  backwards: slide
+}
+
+const slideR = {
+  old: {
+    name: 'fadeOut',
+    duration: '0.333s',
+    // easing: 'linear',
+  },
+  new: {
+    name: 'slideRight',
+    duration: '0.666s',
+    // easing: 'linear',
+  }
+}
+
+const slideRight: TransitionDirectionalAnimations = {
+  forwards: slideR,
+  backwards: slideR
+}
 
 interface Props {
   page: any
@@ -20,7 +58,7 @@ const { page, navigation, bottomNavigation, color, index, counter } = Astro.prop
 ---
 
 <main style={`--color: ${color || 'black'};`}>
-  <aside class:list={[{ index }]}>
+  <aside class:list={[{ index }]} transition:animate={slideRight}>
     {index
       ? <Navigation item={navigation} />
       : <>
@@ -41,7 +79,7 @@ const { page, navigation, bottomNavigation, color, index, counter } = Astro.prop
   <!-- <h1>{page.fields.title}</h1> -->
 
   <!-- <pre>{JSON.stringify(page.fields.content, null, 2)}</pre> -->
-  <section>
+  <section transition:animate={slideLeft}>
     <Content content={page.fields.content} />
 
     {bottomNavigation && <Navigation item={bottomNavigation} small />}
