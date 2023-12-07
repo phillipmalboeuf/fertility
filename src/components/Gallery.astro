@@ -12,19 +12,20 @@ const { item } = Astro.props;
 
 const randoms = {
   underlays: Math.floor(Math.random() * item.fields.underlays.length),
-  content: Math.floor(Math.random() * item.fields.content.length),
+  // content: Math.floor(Math.random() * item.fields.content.length),
+  content: 2,
   overlays: Math.floor(Math.random() * item.fields.overlays.length),
 }
 ---
 
 <section class="gallery">
   <figure>
-    <Media media={item.fields.underlays[randoms.underlays]} eager square />
-
     <details>
       <summary>{item.fields.title} <Fragment set:html={Close} /></summary>
       <Content content={[item.fields.content[randoms.content]]} />
     </details>
+
+    <Media media={item.fields.underlays[randoms.underlays]} eager square />
 
     <div class="overlay" style={`--mask: url(${item.fields.overlays[randoms.overlays].fields.file.url})`}></div>
   </figure>
@@ -57,14 +58,14 @@ const randoms = {
       align-items: center;
       justify-content: center;
 
-      &:first-child {
-        :global(img) {
-          height: min(72vh, 92vw);
-          width: min(72vh, 92vw);
-          max-height: none;
-          object-fit: cover;
-          border-radius: 50%;
-        }
+      :global(img) {
+        height: min(72vh, 92vw);
+        width: min(72vh, 92vw);
+        max-height: none;
+        object-fit: cover;
+        border-radius: 50%;
+
+        transition: all 666ms;
       }
     }
 
@@ -84,6 +85,8 @@ const randoms = {
       mask-size: min(120vh, 153vw);
       -webkit-mask-size: min(120vh, 153vw);
       animation: rotating 20s linear infinite;
+
+      transition: opacity 666ms;
     }
 
     details {
@@ -92,6 +95,7 @@ const randoms = {
       bottom: 0;
       left: 0;
       width: 100%;
+      background-color: fade-out($black, 1);
 
       summary {
         cursor: pointer;
@@ -113,6 +117,7 @@ const randoms = {
       &[open] {
         color: $front-color;
         background-color: fade-out($black, 0.666);
+        transition: background-color 666ms;
         min-height: 100vh;
 
         summary {
@@ -126,9 +131,25 @@ const randoms = {
           }
         }
 
-        + :global(picture) {
-          display: none;
+        // + :global(picture) {
+        //   display: none;
+        // }
+
+        ~ .overlay {
+          opacity: 0;
         }
+
+        ~ :global(picture img) {
+          height: 100%;
+          width: 100%;
+          border-radius: 0;
+        }
+      }
+
+      :global(summary) {
+        padding: $base * 2;
+        background-color: transparent;
+        justify-content: center;
       }
     }
   }
