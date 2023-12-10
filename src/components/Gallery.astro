@@ -117,7 +117,7 @@ const randoms = {
         color: $front-color;
         background-color: fade-out($black, 0.666);
         transition: background-color 666ms;
-        min-height: 100vh;
+        height: 100%;
 
         summary {
           position: absolute;
@@ -125,8 +125,17 @@ const randoms = {
           right: 0;
           font-size: 0;
 
+          @media (max-width: $phone) {
+            padding: $base * 0.5;
+          }
+
           :global(> svg) {
             display: inline-block;
+
+            @media (max-width: $phone) {
+              width: $base * 2;
+              height: $base * 2;
+            }
           }
         }
 

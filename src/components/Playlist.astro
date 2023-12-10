@@ -29,13 +29,27 @@ const one = item.fields.audioFiles.length === 1
 
 <style lang="scss">
   figure {
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
+    @media (max-width: $phone) {
+      
+    }
+
     center {
       padding: $base * 2;
+
+      @media (max-width: $phone) {
+        padding: ($base * 2) $base;
+      }
+
+      h2 {
+        @media (max-width: $phone) {
+          font-size: $base * 1.5;
+        }
+      }
     }
 
     ol {
@@ -45,7 +59,15 @@ const one = item.fields.audioFiles.length === 1
       max-width: $base * 33;
       margin: auto;
 
+      @media (max-width: $phone) {
+        padding: 0 $base;
+      }
+
       li {
+        @media (max-width: $phone) {
+          font-size: $base * 1.5;
+        }
+
         audio {
         }
 
