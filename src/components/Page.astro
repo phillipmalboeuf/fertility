@@ -63,7 +63,7 @@ const { page, navigation, bottomNavigation, color, index, counter } = Astro.prop
       ? <Navigation item={navigation} />
       : <>
         <a href="/">
-          <h2>Close <LogoWide /></h2>
+          <h2>Close <LogoWide {counter} /></h2>
           <svg width="44" height="44" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect x="20.5479" y="12.2322" width="44.3844" height="11.721" rx="5.36" transform="rotate(45 20.5479 12.2322)" fill="currentColor"/>
           <rect x="51.9341" y="20.5199" width="44.3844" height="11.721" rx="5.36" transform="rotate(135 51.9341 20.5199)" fill="currentColor"/>
@@ -168,7 +168,7 @@ const { page, navigation, bottomNavigation, color, index, counter } = Astro.prop
 
         @media (max-width: $phone) {
           order: -1;
-          margin-top: $base * -4;
+          // margin-top: $base * -4;
         }
       }
 
