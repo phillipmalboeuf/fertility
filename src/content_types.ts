@@ -39,6 +39,8 @@ export type TypePage<Modifiers extends ChainModifiers, Locales extends LocaleCod
 export interface TypePlaylistFields {
     title?: EntryFieldTypes.Symbol;
     audioFiles?: EntryFieldTypes.Array<EntryFieldTypes.AssetLink>;
+    linkLabel?: EntryFieldTypes.Symbol;
+    link?: EntryFieldTypes.Symbol;
 }
 
 export type TypePlaylistSkeleton = EntrySkeletonType<TypePlaylistFields, "playlist">;
