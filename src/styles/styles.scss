@@ -149,6 +149,10 @@ button:focus:not(:focus-visible) {
 	outline: none;
 }
 
+strong, b {
+	font-weight: 500;
+}
+
 
 @keyframes rotating {
   from {
