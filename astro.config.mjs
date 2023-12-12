@@ -20,7 +20,10 @@ export default defineConfig({
           additionalData: `@import "./src/styles/variables.scss";`
         }
       }
-    }
+    },
+    ...process.env.NODE_ENV !== 'development' && {ssr: {
+      noExternal: ['@contentful/rich-text-types']
+    }}
   },
   integrations: [svelte()]
 });
