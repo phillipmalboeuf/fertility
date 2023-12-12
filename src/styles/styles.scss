@@ -91,6 +91,17 @@ a:hover {
 	text-decoration: underline;
 }
 
+blockquote {
+	padding-left: $base * 2;
+	margin: ($base * 2) 0;
+	border-left: 0.5px solid;
+
+	p {
+		font-size: $base * 2.3125;
+		font-weight: 300;
+		line-height: 1.1;
+	}
+}
 
 
 ul,
@@ -100,6 +111,17 @@ ol {
 	&.list--unstyled {
 		padding: 0;
 		list-style: none;
+	}
+}
+
+table {
+	margin-bottom: $base * 2;
+
+	td,
+	th {
+		text-align: left;
+		padding: $base;
+		border-bottom: 0.25px solid;
 	}
 }
 
