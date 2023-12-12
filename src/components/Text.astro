@@ -1,10 +1,11 @@
 ---
 import type { Entry } from 'contentful'
-import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
+import { documentToHtmlString, type Options } from "@contentful/rich-text-html-renderer"
+import { BLOCKS, MARKS, INLINES, type Text } from '@contentful/rich-text-types'
 import type { EntryFieldTypes } from "contentful"
 import type { TypePageSkeleton, TypeNavigationSkeleton, TypeTextSkeleton } from '@/content_types'
 import Content from './Content.astro'
-import { map } from 'astro/zod'
+import Media from './Media.astro'
 
 interface Props {
   item: Entry<TypeTextSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">
@@ -26,7 +27,31 @@ const { item } = Astro.props;
     </>}
   </summary>
   <section>
-    <Fragment set:html={documentToHtmlString(item.fields.body)} />
+    <Fragment set:html={documentToHtmlString(item.fields.body, {
+      renderMark: {
+        [MARKS.CODE]: (text) => {
+          return text.toString()
+        }
+      },
+      renderNode: {
+        [INLINES.ASSET_HYPERLINK]: (node) => {
+          return `<a href="${node.data.target.fields.file.url}" target='_blank'>${(node.content[0] as Text)?.value}</a>`
+        },
+        [BLOCKS.EMBEDDED_ASSET]: (node) => {
+          return `<figure>
+            <img src="${node.data.target.fields.file.url}" />
+          </figure>`
+        },
+        // [INLINES.EMBEDDED_ENTRY]: (node) => {
+        //   return {
+        //   }[node.data.target.sys.contentType.sys.id]
+        // },
+        // [BLOCKS.EMBEDDED_ENTRY]: (node) => {
+        //   return {
+        //   }[node.data.target.sys.contentType.sys.id]
+        // }
+      }
+    })} />
     
     {item.fields.more && <div><Content content={item.fields.more} /></div>}
   </section>
