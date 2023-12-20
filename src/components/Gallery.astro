@@ -19,7 +19,7 @@ const randoms = {
 
 <section class="gallery">
   <figure>
-    <details>
+    <details class="tip">
       <summary>{item.fields.title} <Fragment set:html={Close} /></summary>
       <Content content={[item.fields.content[randoms.content]]} />
     </details>
@@ -29,6 +29,15 @@ const randoms = {
     <div class="overlay" style={`--mask: url(${item.fields.overlays[randoms.overlays].fields.file.url})`}></div>
   </figure>
 </section>
+
+<script>
+  const overlay = document.querySelector<HTMLElement>('.overlay');
+
+  overlay.addEventListener('click', () => {
+    const tip = document.querySelector<HTMLDetailsElement>('.tip')
+    tip.setAttribute('open', 'true')
+  })
+</script>
 
 <style lang="scss">
   section {
@@ -69,6 +78,7 @@ const randoms = {
     }
 
     .overlay {
+      cursor: pointer;
       position: absolute;
       top: 0;
       left: 0;
