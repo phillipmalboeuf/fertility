@@ -14,6 +14,7 @@ const randoms = {
   underlays: Math.floor(Math.random() * item.fields.underlays?.length),
   content: Math.floor(Math.random() * item.fields.content.length),
   overlays: Math.floor(Math.random() * item.fields.overlays.length),
+  // overlays: 5
 }
 ---
 
@@ -26,7 +27,7 @@ const randoms = {
 
     <Media media={item.fields.underlays[randoms.underlays]} eager square />
 
-    <div class="overlay" style={`--mask: url(${item.fields.overlays[randoms.overlays].fields.file.url})`}></div>
+    <div class="overlay" class:list={{ pulse: randoms.overlays >= 4 }} style={`--mask: url(${item.fields.overlays[randoms.overlays].fields.file.url})`}></div>
   </figure>
 </section>
 
@@ -77,6 +78,11 @@ const randoms = {
       }
     }
 
+    @keyframes beat{
+      from { transform: scale(0.9); }
+      to { transform: scale(1.10); }
+    }
+
     .overlay {
       cursor: pointer;
       position: absolute;
@@ -96,6 +102,11 @@ const randoms = {
       animation: rotating 20s linear infinite;
 
       transition: opacity 666ms;
+
+      &.pulse {
+        animation: beat 888ms infinite alternate;
+        transform-origin: center;
+      }
     }
 
     details {
