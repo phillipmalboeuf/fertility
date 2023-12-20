@@ -14,7 +14,7 @@ const { item } = Astro.props;
 ---
 
 <details id={item.fields.id} open={!item.fields.collapsable}>
-  <summary class:list={{ rounded: item.fields.rounded }}>
+  <summary class:list={{ rounded: item.fields.rounded, text: true }}>
     {item.fields.title?.split('|').map(t => t === '' ? <h2></h2> : <h2><span>{t}</span></h2>)}
     {item.fields.collapsable && <>
     <svg class="plus" xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
@@ -56,6 +56,23 @@ const { item } = Astro.props;
     {item.fields.more && <div><Content content={item.fields.more} /></div>}
   </section>
 </details>
+
+<script>
+  const summaries = document.querySelectorAll<HTMLElement>('summary.text');
+
+  summaries.forEach((summary) => {
+    summary.addEventListener('click', () => {
+      setTimeout(() => {
+        if (summary.parentElement.hasAttribute('open')) {
+          window.scrollTo({
+            top: summary.offsetTop - 10,
+            behavior: 'smooth'
+          })
+        }
+      }, 10)
+    })
+  })
+</script>
 
 <style lang="scss">
   details {
@@ -163,6 +180,10 @@ const { item } = Astro.props;
       @media (max-width: $phone) {
         padding-left: $base;
         padding-right: $base;
+      }
+
+      :global(section) {
+        margin-bottom: ($base * 3);
       }
 
       :global(h5),
