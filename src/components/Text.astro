@@ -62,6 +62,7 @@ const { item } = Astro.props;
 
   summaries.forEach((summary) => {
     summary.addEventListener('click', () => {
+      console.log('click', summary)
       setTimeout(() => {
         if (summary.parentElement.hasAttribute('open')) {
           window.scrollTo({

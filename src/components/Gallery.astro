@@ -46,7 +46,7 @@ const randoms = {
 <script>
   const overlay = document.querySelector<HTMLElement>('.overlay');
 
-  overlay.addEventListener('click', () => {
+  overlay?.addEventListener('click', () => {
     const tip = document.querySelector<HTMLDetailsElement>('.tip')
     tip.setAttribute('open', 'true')
   })
