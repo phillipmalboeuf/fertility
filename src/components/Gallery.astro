@@ -12,7 +12,14 @@ const { item } = Astro.props;
 
 const randoms = {
   underlays: Math.floor(Math.random() * item.fields.underlays?.length),
-  content: Math.floor(Math.random() * item.fields.content.length),
+  content: [
+    Math.floor(Math.random() * item.fields.content.length),
+    Math.floor(Math.random() * item.fields.content.length),
+    Math.floor(Math.random() * item.fields.content.length),
+    Math.floor(Math.random() * item.fields.content.length),
+    Math.floor(Math.random() * item.fields.content.length),
+    Math.floor(Math.random() * item.fields.content.length)
+  ],
   overlays: Math.floor(Math.random() * item.fields.overlays.length),
   // overlays: 5
 }
@@ -20,9 +27,14 @@ const randoms = {
 
 <section class="gallery">
   <figure>
-    <details class="tip">
-      <summary>{item.fields.title} <Fragment set:html={Close} /></summary>
-      <Content content={[item.fields.content[randoms.content]]} />
+    <details class="tip" data-tip="1">
+      <summary class="title">{item.fields.title} <Fragment set:html={Close} /></summary>
+      <Content content={[item.fields.content[randoms.content[0]]]} />
+      <Content content={[item.fields.content[randoms.content[1]]]} />
+      <Content content={[item.fields.content[randoms.content[2]]]} />
+      <Content content={[item.fields.content[randoms.content[3]]]} />
+      <Content content={[item.fields.content[randoms.content[4]]]} />
+      <Content content={[item.fields.content[randoms.content[5]]]} />
     </details>
 
     <Media media={item.fields.underlays[randoms.underlays]} eager square />
@@ -37,6 +49,16 @@ const randoms = {
   overlay.addEventListener('click', () => {
     const tip = document.querySelector<HTMLDetailsElement>('.tip')
     tip.setAttribute('open', 'true')
+  })
+
+  const summaries = document.querySelectorAll<HTMLElement>('summary.title');
+
+  summaries.forEach((summary) => {
+    summary.addEventListener('click', () => {
+      if (summary.parentElement.hasAttribute('open')) {
+        summary.parentElement.setAttribute("data-tip", Math.ceil(Math.random() * 6).toString())
+      }
+    })
   })
 </script>
 
@@ -180,6 +202,41 @@ const randoms = {
         padding: $base * 2;
         background-color: transparent;
         justify-content: center;
+      }
+
+      :global(> details),
+      :global(> figure) {
+        display: none;
+      }
+
+      &[data-tip="1"] {
+        :global(> details:nth-child(#{1+ 1})) { display: block; }
+        :global(> figure:nth-child(#{1+ 1})) { display: flex; }
+      }
+
+      &[data-tip="2"] {
+        :global(> details:nth-child(#{2+ 1})) { display: block; }
+        :global(> figure:nth-child(#{2+ 1})) { display: flex; }
+      }
+
+      &[data-tip="3"] {
+        :global(> details:nth-child(#{3+ 1})) { display: block; }
+        :global(> figure:nth-child(#{3+ 1})) { display: flex; }
+      }
+
+      &[data-tip="4"] {
+        :global(> details:nth-child(#{4+ 1})) { display: block; }
+        :global(> figure:nth-child(#{4+ 1})) { display: flex; }
+      }
+
+      &[data-tip="5"] {
+        :global(> details:nth-child(#{5+ 1})) { display: block; }
+        :global(> figure:nth-child(#{5+ 1})) { display: flex; }
+      }
+
+      &[data-tip="6"] {
+        :global(> details:nth-child(#{6+ 1})) { display: block; }
+        :global(> figure:nth-child(#{6+ 1})) { display: flex; }
       }
     }
   }
