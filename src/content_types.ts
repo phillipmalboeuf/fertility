@@ -4,6 +4,7 @@ export interface TypeGalleryFields {
     title?: EntryFieldTypes.Symbol;
     overlays?: EntryFieldTypes.Array<EntryFieldTypes.AssetLink>;
     underlays?: EntryFieldTypes.Array<EntryFieldTypes.AssetLink>;
+    color?: EntryFieldTypes.Symbol;
     content?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypePlaylistSkeleton | TypeTextSkeleton>>;
 }
 

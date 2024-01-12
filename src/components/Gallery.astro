@@ -25,7 +25,7 @@ const randoms = {
 }
 ---
 
-<section class="gallery">
+<section class="gallery" style={`--gallery-color: ${item.fields.color || '#E4D7B2'};`}>
   <figure>
     <details class="tip" data-tip="1">
       <summary class="title">{item.fields.title} <Fragment set:html={Close} /></summary>
@@ -64,7 +64,6 @@ const randoms = {
 
 <style lang="scss">
   section {
-    --gallery-color: #{$beige};
     position: relative;
     margin: $base * -3;
     background: var(--gallery-color);
