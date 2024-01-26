@@ -28,12 +28,13 @@ const navigation = (await client.getEntries<TypeNavigationSkeleton, "WITHOUT_UNR
 })).items[0]
 
 let counter = Astro.cookies.has("counter") ? Astro.cookies.get("counter").number() : 0
+const color = navigation.fields.links.find(link => link.fields.destination === `/${page.fields.id}`)?.fields.color
 ---
 
 
 <Layout title={page.fields.title}>
-  <Menu title={page.fields.title} {navigation} />
+  <Menu title={page.fields.title} {color} {navigation} />
   <main>
-    <Page {page} {navigation} color={navigation.fields.links.find(link => link.fields.destination === `/${page.fields.id}`)?.fields.color} {counter} />
+    <Page {page} {navigation} {color} {counter} />
   </main>
 </Layout>

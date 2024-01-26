@@ -16,7 +16,7 @@ const { title, navigation, color, index, counter } = Astro.props;
 ---
 
 
-<header>
+<header style={`--color: ${color || 'black'};`}>
   <input type="checkbox" name="menu" id="menu">
   <label for="menu">
     <div class="open">
@@ -64,6 +64,7 @@ const { title, navigation, color, index, counter } = Astro.props;
 
     + label {
       cursor: pointer;
+      color: var(--color);
 
       h2 {
         line-height: 1.25;
