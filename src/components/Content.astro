@@ -5,6 +5,7 @@ import Navigation from './Navigation.astro'
 import Text from './Text.astro'
 import Gallery from './Gallery.astro'
 import Playlist from './Playlist.astro'
+import Slider from './Slider.astro'
 
 interface Props {
   content: any
@@ -16,5 +17,6 @@ const { content } = Astro.props;
   'navigation': <Navigation {item} />,
   'gallery': <Gallery {item} />,
   'playlist': <Playlist {item} />,
+  'slider': <Slider {item} />,
   'text': <Text {item} />
 }[item.sys.contentType.sys.id]))}

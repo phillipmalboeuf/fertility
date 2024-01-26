@@ -96,9 +96,14 @@ a:hover {
 }
 
 blockquote {
-	padding-left: $base * 2;
 	margin: ($base * 2) 0;
+	padding-left: $base * 2;
 	border-left: 0.5px solid;
+
+	&:has(+ p:empty) {
+		border: none;
+		padding-left: 0;
+	}
 
 	p {
 		font-size: $base * 2.3125;

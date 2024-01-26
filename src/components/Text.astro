@@ -175,8 +175,10 @@ const { item } = Astro.props;
       flex-direction: column;
       gap: $base;
 
-      max-width: $base * 36;
-      margin: ($base * 3) auto ($base * 6);
+      &:not(:has(.slider)) {
+        max-width: $base * 36;
+        margin: ($base * 3) auto ($base * 6);
+      }
 
       @media (max-width: $phone) {
         padding-left: $base;

@@ -1,0 +1,144 @@
+---
+import type { Entry } from 'contentful'
+import { documentToHtmlString, type Options } from "@contentful/rich-text-html-renderer"
+import { BLOCKS, MARKS, INLINES, type Text } from '@contentful/rich-text-types'
+
+import type { TypeSliderSkeleton } from '@/content_types'
+import Content from './Content.astro'
+import Media from './Media.astro'
+
+interface Props {
+  item: Entry<TypeSliderSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">
+}
+const { item } = Astro.props;
+---
+
+<main class="slider" id={item.fields.id}>
+  <ol>
+    {item.fields.slides?.map(slide => <li class:list={{ slide: true, media: slide.fields.media }}>
+      <Fragment set:html={documentToHtmlString(slide.fields.body)} />
+
+      <figure>
+        {slide.fields.media && <Media media={slide.fields.media} />}
+      </figure>
+    </li>)}
+  </ol>
+
+  <nav class="dots">
+    {item.fields.slides?.map((slide, i) => <button class="dot">{i}</button>)}
+  </nav>
+</main>
+
+<script>
+  import EmblaCarousel from 'embla-carousel'
+
+  const elements = document.querySelectorAll<HTMLElement>('.slider')
+
+  elements.forEach((element) => {
+    const api = EmblaCarousel(element, { loop: true })
+
+    const dots = element.querySelectorAll<HTMLElement>('.dot')
+
+    dots.forEach((dot, i) => {
+      if (i === 0) { dot.classList.add('current') }
+      dot.addEventListener("click", () => {
+        api.scrollTo(i)
+      })
+    })
+
+    api.on('select', () => {
+      dots.forEach((dot, i) => {
+        dot.classList.remove('current')
+        if (api.selectedScrollSnap() === i) {
+          dot.classList.add('current')
+        }
+      })
+    })
+  })
+</script>
+
+<style lang="scss">
+  main {
+    position: relative;
+    margin-top: ($base * -1) + 1px;
+    margin-bottom: 1px;
+    
+    overflow: hidden;
+
+    ol {
+      list-style: none;
+      display: flex;
+      cursor: ew-resize;
+      padding-left: 0;
+
+      li {
+        flex: 0 0 100%;
+        min-width: 0;
+
+        position: relative;
+        min-height: 66vh;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: $base;
+        
+        :global(*:not(:last-child)) {
+          max-width: $base * 36;
+        }
+
+        // &.media {
+        //   color: $front-color;
+        // }
+
+        figure {
+          position: absolute;
+          z-index: -1;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          // background-color: var(--color);
+
+          :global(img),
+          :global(video) {
+            width: 100%;
+            height: 100%;
+            aspect-ratio: none;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+
+    .dots {
+      display: flex;
+      justify-content: center;
+      gap: $base * 0.75;
+      font-size: 0;
+
+      position: absolute;
+      bottom: $base * 2.5;
+      left: 0;
+      width: 100%;
+      pointer-events: none;
+
+      .dot {
+        pointer-events: auto;
+        width: $base * 0.666;
+        height: $base * 0.666;
+        background-color: var(--color);
+        border-radius: 50%;
+        opacity: 0.5;
+        transition: opacity 333ms;
+
+        &.current,
+        &:hover,
+        &:focus {
+          opacity: 1;
+        }
+      }
+    }
+  }
+</style>
