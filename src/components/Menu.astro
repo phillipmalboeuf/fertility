@@ -16,7 +16,7 @@ const { title, navigation, color, index, counter } = Astro.props;
 ---
 
 
-<header style={`--color: ${color || 'black'};`}>
+<header class:list={{ index }} style={`--color: ${color || 'black'};`}>
   <input type="checkbox" name="menu" id="menu">
   <label for="menu">
     <div class="open">
@@ -40,8 +40,7 @@ const { title, navigation, color, index, counter } = Astro.props;
 
 <style lang="scss">
   header {
-    position: -webkit-sticky;
-    position: sticky;
+    position: fixed;
     top: 0;
     left: 0;
     width: $base * 26;
@@ -54,8 +53,23 @@ const { title, navigation, color, index, counter } = Astro.props;
     }
 
     @media (max-width: $phone) {
+      position: -webkit-sticky;
+      position: sticky;
       padding: $base;
       background-color: $white;
+    }
+
+    &.index {
+      @media (min-width: $phone) {
+        input + label {
+          display: none !important;
+        }
+
+        :global(nav) {
+          display: block !important;
+          margin-top: 0;
+        }
+      }
     }
   }
 
@@ -64,7 +78,7 @@ const { title, navigation, color, index, counter } = Astro.props;
 
     + label {
       cursor: pointer;
-      color: var(--color);
+      // color: var(--color);
 
       h2 {
         line-height: 1.25;

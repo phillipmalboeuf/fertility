@@ -141,7 +141,7 @@ const randoms = {
       summary {
         cursor: pointer;
         font-size: $base * 1.25;
-        padding: ($base * 3.5) ($base * 2);
+        padding: ($base * 2) ($base * 2);
         text-align: center;
 
         &::marker,
@@ -167,6 +167,7 @@ const randoms = {
           top: 0;
           right: 0;
           font-size: 0;
+          padding: ($base * 2);
 
           @media (max-width: $phone) {
             padding: $base * 0.5;
@@ -194,6 +195,11 @@ const randoms = {
           height: 100%;
           width: 100%;
           border-radius: 0;
+        }
+
+        :global(details > summary),
+        :global(center) {
+          margin-top: $base * 1;
         }
       }
 

@@ -30,7 +30,7 @@ Astro.cookies.set("counter", counter.toString(), { path: '/' })
 ---
 
 <Layout title={page.fields.title}>
-	<Menu {navigation} />
+	<Menu index {navigation} />
 	<main>
 		<Page {navigation} {page} index {counter}  />
 	</main>
