@@ -60,15 +60,9 @@ const { page, navigation, bottomNavigation, color, index, counter } = Astro.prop
 <main style={`--color: ${color || 'black'};`}>
   <aside class:list={[{ index }]} transition:animate={slideRight}>
     {index
-      ? <Navigation item={navigation} />
+      ? <div></div>
       : <>
-        <a href="/">
-          <h2>Close <LogoWide {counter} /></h2>
-          <svg width="44" height="44" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="20.5479" y="12.2322" width="44.3844" height="11.721" rx="5.36" transform="rotate(45 20.5479 12.2322)" fill="currentColor"/>
-          <rect x="51.9341" y="20.5199" width="44.3844" height="11.721" rx="5.36" transform="rotate(135 51.9341 20.5199)" fill="currentColor"/>
-          </svg>
-        </a>
+        <div><br /><br /></div>
         <div>
           <h4>Wherever you are in your fertility journey, I’m here to help.</h4>
           <a href="mailto:hey@daniellefertility.com" target="_blank" class="h6">Let’s work together <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M0.0927736 6.67108L13.0928 6.67108L13.0928 8.17108L0.0927734 8.17108L0.0927736 6.67108Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M7.80187 0.158752L6.74121 1.21941L12.9159 7.3941L6.74121 13.5688L7.80187 14.6295L13.9766 8.45477L15.0372 7.39411L13.9766 6.33344L7.80187 0.158752Z" fill="currentColor"/></svg></a>
@@ -114,7 +108,7 @@ const { page, navigation, bottomNavigation, color, index, counter } = Astro.prop
   }
 
     aside {
-      padding: $base * 3;
+      padding: $base * 2;
       background-color: $beige;
       
       @media (min-width: $phone) {
@@ -125,7 +119,7 @@ const { page, navigation, bottomNavigation, color, index, counter } = Astro.prop
       }
 
       @media (max-width: $phone) {
-        padding: $base * 1;
+        padding: 0;
       }
 
       display: flex;
@@ -168,6 +162,7 @@ const { page, navigation, bottomNavigation, color, index, counter } = Astro.prop
 
         @media (max-width: $phone) {
           order: -1;
+          padding: $base;
           // margin-top: $base * -4;
         }
       }
@@ -191,7 +186,7 @@ const { page, navigation, bottomNavigation, color, index, counter } = Astro.prop
     section {
       flex: 3;
       color: var(--color);
-      padding: $base * 3;
+      padding: $base * 2.5;
 
       @media (max-width: $phone) {
         padding: 0;

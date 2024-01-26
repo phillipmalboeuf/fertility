@@ -6,6 +6,7 @@ import type { TypePageSkeleton, TypeNavigationSkeleton } from '@/content_types'
 
 import Page from '@/components/Page.astro'
 import Logo from '@/components/Logo.astro';
+import Menu from '@/components/Menu.astro';
 
 const page = (await client.getEntries<TypePageSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">({
   content_type: "page",
@@ -27,6 +28,7 @@ let counter = Astro.cookies.has("counter") ? Astro.cookies.get("counter").number
 ---
 
 <Layout title={page.fields.title}>
+	<Menu title={page.fields.title} {navigation} />
 	<main>
 		<Page {page} {navigation} {bottomNavigation} color={navigation.fields.links.find(link => link.fields.destination === `/${page.fields.id}`)?.fields.color} {counter} />
 	</main>

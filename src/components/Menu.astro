@@ -1,0 +1,112 @@
+---
+import type { Entry } from 'contentful'
+import type { TypeNavigationSkeleton } from '@/content_types'
+
+import LogoWide from './LogoWide.astro'
+import Navigation from './Navigation.astro'
+
+interface Props {
+  title?: string
+  navigation: Entry<TypeNavigationSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">
+  color?: string
+  index?: boolean
+  counter?: number
+}
+const { title, navigation, color, index, counter } = Astro.props;
+---
+
+
+<header>
+  <input type="checkbox" name="menu" id="menu">
+  <label for="menu">
+    <div class="open">
+      <!-- <h2>Close</h2> -->
+      <svg width="44" height="44" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M3 6.00092H21M3 12.0009H21M3 18.0009H21" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      {title && <h2>{title}</h2>}
+    </div>
+    <div class="close">
+      <a href="/"><h2>Close</h2></a>
+      <svg width="44" height="44" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="20.5479" y="12.2322" width="44.3844" height="11.721" rx="5.36" transform="rotate(45 20.5479 12.2322)" fill="currentColor"/>
+      <rect x="51.9341" y="20.5199" width="44.3844" height="11.721" rx="5.36" transform="rotate(135 51.9341 20.5199)" fill="currentColor"/>
+      </svg>
+    </div>
+  </label>
+
+  <Navigation item={navigation} />
+</header>
+
+<style lang="scss">
+  header {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: $base * 26;
+    max-width: 100%;
+    z-index: 20;
+    padding: $base * 2;
+
+    :global(nav) {
+      margin-top: $base * 2;
+    }
+
+    @media (max-width: $phone) {
+      padding: $base;
+      background-color: $white;
+    }
+  }
+
+  input[name="menu"] {
+    display: none;
+
+    + label {
+      cursor: pointer;
+
+      h2 {
+        line-height: 1.25;
+      }
+      
+      .open {
+        display: flex;
+        align-items: middle;
+        gap: $base;
+
+        @media (max-width: $phone) {
+          h2 {
+            display: none;
+          }
+        }
+      }
+
+      .close {
+        display: none;
+      }
+    }
+
+    :global(~ nav) {
+      display: none;
+    }
+
+    &:checked {
+      :global(~ nav) {
+        display: block;
+      }
+
+      + label {
+
+        .open {
+          display: none;
+        }
+
+        .close {
+          display: flex;
+          justify-content: space-between;
+          align-items: middle;
+        }
+      }
+    }
+  }
+</style>

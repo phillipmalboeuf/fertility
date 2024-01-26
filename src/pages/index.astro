@@ -6,6 +6,7 @@ import type { TypePageSkeleton, TypeNavigationSkeleton } from '@/content_types'
 
 import Page from '@/components/Page.astro'
 import Logo from '@/components/Logo.astro';
+import Menu from '@/components/Menu.astro';
 
 const page = (await client.getEntries<TypePageSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">({
   content_type: "page",
@@ -29,8 +30,9 @@ Astro.cookies.set("counter", counter.toString(), { path: '/' })
 ---
 
 <Layout title={page.fields.title}>
+	<Menu {navigation} />
 	<main>
-		<Page {page} {navigation} index {counter}  />
+		<Page {navigation} {page} index {counter}  />
 	</main>
 </Layout>
 
