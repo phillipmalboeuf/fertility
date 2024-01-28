@@ -15,7 +15,7 @@ const { item } = Astro.props;
 
 <main class="slider" id={item.fields.id}>
   <ol>
-    {item.fields.slides?.map(slide => <li class:list={{ slide: true, media: slide.fields.media }}>
+    {item.fields.slides?.map(slide => <li {...slide.fields.color && { style: `color: ${slide.fields.color}` }} class:list={{ slide: true, media: slide.fields.media }}>
       <Fragment set:html={documentToHtmlString(slide.fields.body)} />
 
       <figure>

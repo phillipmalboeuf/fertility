@@ -70,6 +70,7 @@ export function isTypePlaylist<Modifiers extends ChainModifiers, Locales extends
 export interface TypeSlideFields {
     body?: EntryFieldTypes.RichText;
     media?: EntryFieldTypes.AssetLink;
+    color?: EntryFieldTypes.Symbol;
 }
 
 export type TypeSlideSkeleton = EntrySkeletonType<TypeSlideFields, "slide">;
