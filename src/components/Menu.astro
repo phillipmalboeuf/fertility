@@ -43,14 +43,14 @@ const { title, navigation, color, index, counter } = Astro.props;
     position: fixed;
     top: 0;
     left: 0;
-    width: $base * 26;
+    width: $base * 28;
     max-width: 100%;
     z-index: 20;
     padding: $base * 2;
 
     :global(nav) {
-      margin-top: $base * 2;
-      background-color: $beige;
+      margin-top: $base * 1;
+      // background-color: $beige;
     }
 
     @media (max-width: $phone) {
@@ -62,7 +62,7 @@ const { title, navigation, color, index, counter } = Astro.props;
 
     &.index {
       :global(nav) {
-        background-color: $white;
+        // background-color: $white;
       }
 
       @media (min-width: $phone) {

@@ -65,11 +65,17 @@ const { item } = Astro.props;
     
     overflow: hidden;
 
+    @media (max-width: $phone) {
+      margin: (($base * -1) + 1px) ($base * -1) 1px;
+    }
+
     ol {
       list-style: none;
       display: flex;
       cursor: ew-resize;
       padding-left: 0;
+
+      
 
       li {
         flex: 0 0 100%;
@@ -83,6 +89,10 @@ const { item } = Astro.props;
         align-items: center;
         justify-content: center;
         gap: $base;
+
+        @media (max-width: $phone) {
+          padding: $base;
+        }
         
         :global(*:not(:last-child)) {
           max-width: $base * 36;
