@@ -62,7 +62,7 @@ const { page, navigation, bottomNavigation, color, index, counter } = Astro.prop
     {index
       ? <div></div>
       : <>
-        <div style="height: 25vh"></div>
+        <div></div>
         <div>
           <h4>Wherever you are in your fertility journey, I’m here to help.</h4>
           <a href="mailto:hey@daniellefertility.com" target="_blank" class="h6">Let’s work together <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M0.0927736 6.67108L13.0928 6.67108L13.0928 8.17108L0.0927734 8.17108L0.0927736 6.67108Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M7.80187 0.158752L6.74121 1.21941L12.9159 7.3941L6.74121 13.5688L7.80187 14.6295L13.9766 8.45477L15.0372 7.39411L13.9766 6.33344L7.80187 0.158752Z" fill="currentColor"/></svg></a>
@@ -116,6 +116,10 @@ const { page, navigation, bottomNavigation, color, index, counter } = Astro.prop
         top: 0;
         flex: 1;
         height: 100vh;
+
+        > div:first-child {
+          height: 25vh;
+        }
       }
 
       @media (max-width: $phone) {
@@ -156,9 +160,9 @@ const { page, navigation, bottomNavigation, color, index, counter } = Astro.prop
         }
       } 
 
-      > :global(svg) {
-        width: 100%;
-        height: auto;
+      > :global(a.logo) {
+        // width: 100%;
+        // height: auto;
 
         @media (max-width: $phone) {
           order: -1;
@@ -176,7 +180,7 @@ const { page, navigation, bottomNavigation, color, index, counter } = Astro.prop
           color: $white;
           background-color: $black;
 
-          > :global(svg) {
+          > :global(.logo) {
             display: none;
           }
         }
