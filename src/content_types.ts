@@ -29,6 +29,7 @@ export function isTypeLink<Modifiers extends ChainModifiers, Locales extends Loc
 }
 
 export interface TypeNavigationFields {
+    title?: EntryFieldTypes.Symbol;
     id: EntryFieldTypes.Symbol;
     links?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeLinkSkeleton>>;
 }

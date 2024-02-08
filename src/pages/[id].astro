@@ -16,16 +16,21 @@ import Menu from '@/components/Menu.astro';
 // }
 
 const { id } = Astro.params;
-const page = (await client.getEntries<TypePageSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">({
-  content_type: "page",
-	"fields.id": id,
-	include: 4,
-})).items[0]
-
-const navigation = (await client.getEntries<TypeNavigationSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">({
-  content_type: "navigation",
-	"fields.id": "navigation",
-})).items[0]
+const [page, navigation, sideNavigation] = await Promise.all([
+	(await client.getEntries<TypePageSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">({
+    content_type: "page",
+    "fields.id": id,
+    include: 4,
+  })).items[0],
+	(await client.getEntries<TypeNavigationSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">({
+		content_type: "navigation",
+		"fields.id": "navigation",
+	})).items[0],
+	(await client.getEntries<TypeNavigationSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">({
+		content_type: "navigation",
+		"fields.id": "sidebar",
+	})).items[0]
+])
 
 let counter = Astro.cookies.has("counter") ? Astro.cookies.get("counter").number() : 0
 const color = navigation.fields.links.find(link => link.fields.destination === `/${page.fields.id}`)?.fields.color
@@ -35,6 +40,6 @@ const color = navigation.fields.links.find(link => link.fields.destination === `
 <Layout title={page.fields.title}>
   <Menu title={page.fields.title} {color} {navigation} />
   <main>
-    <Page {page} {navigation} {color} {counter} />
+    <Page {page} {navigation} {sideNavigation} {color} {counter} />
   </main>
 </Layout>
