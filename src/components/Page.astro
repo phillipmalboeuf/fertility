@@ -79,7 +79,13 @@ const { page, sideNavigation, bottomNavigation, color, index, counter } = Astro.
   <section transition:animate={slideLeft}>
     <Content content={page.fields.content} />
 
-    {bottomNavigation && <Navigation item={bottomNavigation} small />}
+    {bottomNavigation && <Navigation item={{
+      ...bottomNavigation,
+      fields: {
+        ...bottomNavigation.fields,
+        links: bottomNavigation.fields.links.filter(link => link.fields.destination !== ('/' + page.fields.id))
+      }
+    }} small />}
   </section>
 </main>
 

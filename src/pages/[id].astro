@@ -16,7 +16,7 @@ import Menu from '@/components/Menu.astro';
 // }
 
 const { id } = Astro.params;
-const [page, navigation, sideNavigation] = await Promise.all([
+const [page, navigation, sideNavigation, bottomNavigation] = await Promise.all([
 	(await client.getEntries<TypePageSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">({
     content_type: "page",
     "fields.id": id,
@@ -29,7 +29,11 @@ const [page, navigation, sideNavigation] = await Promise.all([
 	(await client.getEntries<TypeNavigationSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">({
 		content_type: "navigation",
 		"fields.id": "sidebar",
-	})).items[0]
+	})).items[0],
+	(await client.getEntries<TypeNavigationSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">({
+		content_type: "navigation",
+		"fields.id": "contact",
+	})).items[0],
 ])
 
 let counter = Astro.cookies.has("counter") ? Astro.cookies.get("counter").number() : 0
@@ -40,6 +44,6 @@ const color = navigation.fields.links.find(link => link.fields.destination === `
 <Layout title={page.fields.title}>
   <Menu title={page.fields.title} {color} {navigation} />
   <main>
-    <Page {page} {navigation} {sideNavigation} {color} {counter} />
+    <Page {page} {navigation} {sideNavigation} {color} {counter} bottomNavigation={["contact", "privacy", "disclaimer"].includes(page.fields.id) ? bottomNavigation : undefined} />
   </main>
 </Layout>
