@@ -210,6 +210,10 @@ const { page, sideNavigation, bottomNavigation, color, index, counter } = Astro.
         justify-content: center;
         gap: $base * 2;
         margin-top: 33vh;
+
+        @media (max-width: $phone) {
+          margin-top: 15vh;
+        }
       }
     }
 </style>

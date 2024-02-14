@@ -2,6 +2,7 @@
 import type { Entry } from 'contentful'
 import type { TypeGallerySkeleton } from '@/content_types'
 import Close from '@/icons/close.svg?raw'
+import Arrow from '@/icons/arrow.svg?raw'
 import Media from './Media.astro'
 import Content from './Content.astro'
 
@@ -28,7 +29,7 @@ const randoms = {
 <section class="gallery" style={`--gallery-color: ${item.fields.color || '#E4D7B2'};`}>
   <figure>
     <details class="tip" data-tip="1">
-      <summary class="title">{item.fields.title} <Fragment set:html={Close} /></summary>
+      <summary class="title">{item.fields.title} <Fragment set:html={Arrow} /> <Fragment set:html={Close} /></summary>
       <Content content={[item.fields.content[randoms.content[0]]]} />
       <Content content={[item.fields.content[randoms.content[1]]]} />
       <Content content={[item.fields.content[randoms.content[2]]]} />
@@ -150,7 +151,16 @@ const randoms = {
           content: "";
         }
 
-        :global(> svg) {
+        &:hover,
+        &:focus {
+          text-decoration: underline;
+        }
+
+        :global(> svg:nth-last-child(2)) {
+          margin-left: $base;
+        }
+
+        :global(> svg:last-child) {
           display: none;
         }
       }
@@ -180,6 +190,10 @@ const randoms = {
               width: $base * 2;
               height: $base * 2;
             }
+          }
+
+          :global(> svg:nth-last-child(2)) {
+            display: none;
           }
         }
 

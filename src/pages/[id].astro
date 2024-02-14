@@ -44,6 +44,6 @@ const color = navigation.fields.links.find(link => link.fields.destination === `
 <Layout title={page.fields.title}>
   <Menu title={page.fields.title} {color} {navigation} />
   <main>
-    <Page {page} {navigation} {sideNavigation} {color} {counter} bottomNavigation={["contact", "privacy", "disclaimer"].includes(page.fields.id) ? bottomNavigation : undefined} />
+    <Page {page} {navigation} {sideNavigation} {color} {counter} bottomNavigation={!["home"].includes(page.fields.id) ? bottomNavigation : undefined} />
   </main>
 </Layout>

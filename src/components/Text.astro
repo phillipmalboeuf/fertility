@@ -63,6 +63,10 @@ const { item } = Astro.props;
   summaries.forEach((summary) => {
     summary.addEventListener('click', () => {
       console.log('click', summary)
+      summary.parentElement.parentElement.querySelectorAll<HTMLElement>('details').forEach((detail) => {
+        detail.removeAttribute('open')
+      })
+
       setTimeout(() => {
         if (summary.parentElement.hasAttribute('open')) {
           window.scrollTo({
@@ -177,7 +181,7 @@ const { item } = Astro.props;
 
       &:not(:has(.slider)) {
         max-width: $base * 36;
-        margin: ($base * 3) auto ($base * 6);
+        margin: ($base * 3) auto;
       }
 
       @media (max-width: $phone) {
