@@ -62,10 +62,11 @@ const { item } = Astro.props;
 
   summaries.forEach((summary) => {
     summary.addEventListener('click', () => {
-      console.log('click', summary)
-      summary.parentElement.parentElement.querySelectorAll<HTMLElement>('details').forEach((detail) => {
-        detail.removeAttribute('open')
-      })
+      if (!summary.parentElement.hasAttribute('open')) {
+        summary.parentElement.parentElement.querySelectorAll<HTMLElement>('details').forEach((detail) => {
+          detail.removeAttribute('open')
+        })
+      }
 
       setTimeout(() => {
         if (summary.parentElement.hasAttribute('open')) {
