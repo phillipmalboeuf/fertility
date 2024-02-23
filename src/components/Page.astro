@@ -79,6 +79,15 @@ const { page, sideNavigation, bottomNavigation, color, index, counter } = Astro.
   <section transition:animate={slideLeft}>
     <Content content={page.fields.content} />
 
+    {page.fields.id === 'privacy' && <><div name="termly-embed" data-id="6b2dbdf0-ed8e-449d-a5bf-cba1239f6a3f"></div>
+<script type="text/javascript">(function(d, s, id) {
+ var js, tjs = d.getElementsByTagName(s)[0];
+ if (d.getElementById(id)) return;
+ js = d.createElement(s); js.id = id;
+ js.src = "https://app.termly.io/embed-policy.min.js";
+ tjs.parentNode.insertBefore(js, tjs);
+}(document, 'script', 'termly-jssdk'));</script></>}
+
     {bottomNavigation && <Navigation item={{
       ...bottomNavigation,
       fields: {
@@ -113,6 +122,11 @@ const { page, sideNavigation, bottomNavigation, color, index, counter } = Astro.
       //   top: calc(55vw - $base);
       //   width: 100%;
       // }
+    }
+
+    div[name="termly-embed"] {
+      max-width: $base * 38;
+      margin: ($base * 3) auto;
     }
   }
 
