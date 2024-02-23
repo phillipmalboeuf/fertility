@@ -79,6 +79,7 @@ const { page, sideNavigation, bottomNavigation, color, index, counter } = Astro.
   <section transition:animate={slideLeft}>
     <Content content={page.fields.content} />
 
+    <!-- @ts-ignore -->
     {page.fields.id === 'privacy' && <><div name="termly-embed" data-id="6b2dbdf0-ed8e-449d-a5bf-cba1239f6a3f"></div>
 <script type="text/javascript">(function(d, s, id) {
  var js, tjs = d.getElementsByTagName(s)[0];
